@@ -1,22 +1,19 @@
-import { Component, OnInit , Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from 'src/app/sharedservice/data.service';
 
 @Component({
- selector: 'app-component2',
- templateUrl: './component2.component.html',
- styleUrls: ['./component2.component.css']
+  selector: 'app-component2',
+  templateUrl: './component2.component.html',
+  styleUrls: ['./component2.component.css']
 })
 export class Component2Component implements OnInit {
 
- Message:String;
- @Output() 
- messageChild = new EventEmitter<String>();
+  message : String;
+  
+  constructor(private dataService : DataService) { }
 
- constructor() { }
+  ngOnInit() {
+    this.dataService.currentMessage.subscribe(message => this.message = message);
+  }
 
- ngOnInit() {
- }
- messageChildHandler(value : string){
-      this.Message = value;
- }
 }
-

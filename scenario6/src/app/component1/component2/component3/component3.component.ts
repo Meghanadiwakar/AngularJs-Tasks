@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from 'src/app/sharedservice/data.service';
 
 @Component({
   selector: 'app-component3',
@@ -7,10 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class Component3Component implements OnInit {
   
- @Input() 
- ChildData:String;
-  constructor() { }
+  message : String;
+  
+  constructor(private dataService : DataService) { }
 
   ngOnInit() {
+    this.dataService.currentMessage.subscribe(message => this.message = message);
   }
+
 }
